@@ -34,3 +34,12 @@ Run `npm run lint` then `npm run build` before considering work done. There is n
 - Do not add `export const dynamicParams` to routes; it is incompatible with `cacheComponents`.
 - Contact details are intentionally unset in `src/data/portfolio.ts` (`email`/`whatsapp` are `null`). With no `getContactHref()`, contact CTAs render disabled with a note. Fill these values to enable mailto/WhatsApp links; do not add fake contact info.
 - Git remote: `https://github.com/alganirobbi5/robbi-portfolio.git`, branch `main`.
+
+## Workflow & AI Bloat Control
+- **No new dependencies.** Never run `npm install <package>` for animation, UI, icons, or utility libraries. Use native CSS, Tailwind 4, and React built-ins only.
+- **Preserve the visual language.** Do not modify `globals.css` theme tokens (colors, fonts) or change the overall layout structure unless explicitly asked.
+- **Surgical edits only.** When fixing a bug or adding a feature, change the minimum number of lines possible. Do not refactor working code into "cleaner" abstractions unless requested.
+- **No new pages or routes.** Work within the existing `/`, `/work`, and `/work/[slug]` structure.
+- **Static-first.** Never introduce backend logic, API routes, database calls, or client-side state management (except the existing `navbar.tsx` mobile menu). 
+- **Verify before finish.** Always run `npm run lint` and `npm run build` at the end of a task. If a build fails due to `cacheComponents` or `new Date()`, fix it using the existing `"use cache"` pattern in `footer.tsx`.
+- **Stop and ask.** If a task requires violating any of these rules (e.g., adding a library or changing the design system), stop and ask for confirmation first.
