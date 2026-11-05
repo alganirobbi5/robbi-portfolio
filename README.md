@@ -39,4 +39,11 @@ Product visuals are CSS-only mockups in `src/components/product-preview.tsx`. Re
 
 ## Contact
 
-Email and WhatsApp values are intentionally `null` until confirmed. Add them to `contact` in `src/data/portfolio.ts`; otherwise contact CTAs remain disabled with an explanatory note.
+Contact links read from `.env.local`:
+
+```bash
+NEXT_PUBLIC_CONTACT_WHATSAPP=628xxxxxxxxxx
+NEXT_PUBLIC_CONTACT_EMAIL=email@domain.com
+```
+
+WhatsApp takes priority over email. Replace the placeholders with real values; `.env.local` is gitignored. If both are empty, contact CTAs remain disabled.

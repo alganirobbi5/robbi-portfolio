@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { ProductPreview } from "@/components/product-preview";
 import type { Project } from "@/data/portfolio";
 
@@ -56,27 +57,21 @@ export function CaseStudyLayout({
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-16">
             <div className="space-y-12">
               <section>
-                <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                  Problem
-                </h2>
+                <SectionHeading index="01">The Problem</SectionHeading>
                 <p className="mt-4 text-base leading-7 text-ink sm:text-lg sm:leading-8">
                   {project.problem}
                 </p>
               </section>
 
               <section>
-                <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                  Solution
-                </h2>
+                <SectionHeading index="02">The Solution</SectionHeading>
                 <p className="mt-4 text-base leading-7 text-ink sm:text-lg sm:leading-8">
                   {project.solution}
                 </p>
               </section>
 
               <section>
-                <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                  Key features
-                </h2>
+                <SectionHeading index="03">Key Features</SectionHeading>
                 <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
                   {project.features.map((feature) => (
                     <li key={feature} className="flex gap-2.5 text-sm text-muted">
@@ -88,9 +83,7 @@ export function CaseStudyLayout({
               </section>
 
               <section>
-                <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                  My work
-                </h2>
+                <SectionHeading index="04">My Work</SectionHeading>
                 <ul className="mt-4 space-y-2.5">
                   {project.myWork.map((item) => (
                     <li key={item} className="flex gap-2.5 text-sm text-muted">
@@ -103,11 +96,23 @@ export function CaseStudyLayout({
                   ))}
                 </ul>
               </section>
+
+              {project.result && (
+                <section>
+                  <SectionHeading index="05">Result</SectionHeading>
+                  <p className="mt-4 text-base leading-7 text-ink sm:text-lg sm:leading-8">
+                    {project.result}
+                  </p>
+                </section>
+              )}
             </div>
 
             <aside className="lg:sticky lg:top-24 lg:self-start">
               <div className="rounded-2xl border border-line bg-white p-6">
-                <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+                  Stack
+                </p>
+                <h2 className="mt-2 text-xl font-medium tracking-[-0.02em]">
                   Technology
                 </h2>
                 <ul className="mt-4 flex flex-wrap gap-1.5">
@@ -120,52 +125,86 @@ export function CaseStudyLayout({
                     </li>
                   ))}
                 </ul>
-
-                <div className="mt-6 border-t border-line pt-5">
-                  <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                    Project type
-                  </h3>
-                  <p className="mt-2 text-sm text-ink">{project.category}</p>
-                </div>
               </div>
             </aside>
           </div>
 
           <nav
             aria-label="Project navigation"
-            className="mt-16 grid gap-4 border-t border-line pt-8 sm:grid-cols-2"
+            className="mt-16 border-t border-line pt-8"
           >
-            {previous ? (
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch sm:justify-between">
               <Link
-                href={`/work/${previous.slug}`}
-                className="group rounded-xl border border-line bg-white p-5 transition-colors hover:border-ink/25"
+                href="/work"
+                className="rounded-xl border border-line bg-white p-5 transition-colors hover:border-ink/25 sm:w-44 sm:shrink-0"
               >
                 <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                  ← Previous
+                  Work
                 </span>
-                <span className="mt-2 block text-sm font-medium">{previous.title}</span>
+                <span className="mt-2 flex items-center gap-1.5 text-sm font-medium">
+                  <span aria-hidden="true">←</span>
+                  Back to Work
+                </span>
               </Link>
-            ) : (
-              <div className="hidden sm:block" />
-            )}
 
-            {next ? (
-              <Link
-                href={`/work/${next.slug}`}
-                className="group rounded-xl border border-line bg-white p-5 text-left transition-colors hover:border-ink/25 sm:text-right"
-              >
-                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                  Next →
-                </span>
-                <span className="mt-2 block text-sm font-medium">{next.title}</span>
-              </Link>
-            ) : (
-              <div className="hidden sm:block" />
-            )}
+              <div className="grid flex-1 gap-3 sm:grid-cols-2">
+                {previous ? (
+                  <Link
+                    href={`/work/${previous.slug}`}
+                    className="rounded-xl border border-line bg-white p-5 transition-colors hover:border-ink/25"
+                  >
+                    <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+                      Previous
+                    </span>
+                    <span className="mt-2 block text-sm font-medium">
+                      {previous.title}
+                    </span>
+                  </Link>
+                ) : (
+                  <div className="hidden sm:block" />
+                )}
+
+                {next ? (
+                  <Link
+                    href={`/work/${next.slug}`}
+                    className="rounded-xl border border-line bg-white p-5 text-left transition-colors hover:border-ink/25 sm:text-right"
+                  >
+                    <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+                      Next Project
+                    </span>
+                    <span className="mt-2 flex items-center gap-1.5 text-sm font-medium sm:justify-end">
+                      {next.title}
+                      <span aria-hidden="true">→</span>
+                    </span>
+                  </Link>
+                ) : (
+                  <div className="hidden sm:block" />
+                )}
+              </div>
+            </div>
           </nav>
         </div>
       </article>
     </main>
+  );
+}
+
+function SectionHeading({
+  index,
+  children,
+}: {
+  index: string;
+  children: ReactNode;
+}) {
+  return (
+    <>
+      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+        {index}
+      </p>
+      <h2 className="mt-2 text-xl font-medium tracking-[-0.02em] sm:text-2xl">
+        {children}
+      </h2>
+    </>
   );
 }
 

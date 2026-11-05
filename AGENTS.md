@@ -32,7 +32,7 @@ Run `npm run lint` then `npm run build` before considering work done. There is n
 ## Gotchas
 - `next.config.ts` enables `cacheComponents`; `new Date()` during prerender throws. The footer year uses a `"use cache"` helper — keep that pattern.
 - Do not add `export const dynamicParams` to routes; it is incompatible with `cacheComponents`.
-- Contact details are intentionally unset in `src/data/portfolio.ts` (`email`/`whatsapp` are `null`). With no `getContactHref()`, contact CTAs render disabled with a note. Fill these values to enable mailto/WhatsApp links; do not add fake contact info.
+- `getContactHref()` in `src/data/portfolio.ts` reads `NEXT_PUBLIC_CONTACT_WHATSAPP` first, then `NEXT_PUBLIC_CONTACT_EMAIL`, falling back to the `contact` values. Real values belong only in `.env.local` (gitignored); WhatsApp numbers are normalized to start with `62`. Do not put real contact info in tracked files.
 - Git remote: `https://github.com/alganirobbi5/robbi-portfolio.git`, branch `main`.
 
 ## Workflow & AI Bloat Control

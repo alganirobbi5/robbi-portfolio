@@ -434,6 +434,8 @@ function Contact() {
                 <button
                   type="button"
                   disabled
+                  aria-label="Contact coming soon"
+                  title="Contact coming soon"
                   className="inline-flex h-11 cursor-not-allowed items-center rounded-lg bg-white/10 px-5 text-sm font-medium text-white/45"
                 >
                   Start a Project
@@ -447,11 +449,6 @@ function Contact() {
               </Link>
             </div>
 
-            {!contactHref && (
-              <p className="mt-4 text-xs text-white/45">
-                Direct contact details are being finalized. Check back soon.
-              </p>
-            )}
           </div>
         </div>
       </div>

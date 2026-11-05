@@ -12,6 +12,7 @@ export type Project = {
   problem: string;
   solution: string;
   myWork: string[];
+  result?: string;
 };
 
 export const navItems = [
@@ -55,6 +56,8 @@ export const projects: Project[] = [
       "UX refinement",
       "AI-assisted development workflow",
     ],
+    result:
+      "A responsive finance dashboard that brings transactions, goals, cash flow, and spending insights into one consistent interface.",
   },
   {
     slug: "toko-madura",
@@ -90,6 +93,8 @@ export const projects: Project[] = [
       "Bug fixing",
       "Git collaboration",
     ],
+    result:
+      "A responsive POS interface that supports cashier transactions, cart management, and receipt generation across screen sizes.",
   },
   {
     slug: "restaurant-system",
@@ -125,6 +130,8 @@ export const projects: Project[] = [
       "QR/location workflow",
       "Testing and bug fixing",
     ],
+    result:
+      "A connected restaurant workflow covering customer ordering, cashier operations, kitchen status, payments, and order tracking.",
   },
   {
     slug: "reasuransi-system",
@@ -154,6 +161,8 @@ export const projects: Project[] = [
       "Dashboard and financial summaries",
       "Multi-sheet Excel reporting",
     ],
+    result:
+      "A structured reporting application that records production, premium, and claims data and exports it into multi-sheet Excel reports.",
   },
 ];
 
@@ -289,9 +298,33 @@ export const contact = {
 };
 
 export function getContactHref() {
-  if (contact.email) return `mailto:${contact.email}`;
-  if (contact.whatsapp) return `https://wa.me/${contact.whatsapp.replace(/\D/g, "")}`;
-  return null;
+  const whatsapp = (
+    process.env.NEXT_PUBLIC_CONTACT_WHATSAPP ||
+    contact.whatsapp ||
+    ""
+  ).trim();
+
+  if (whatsapp) {
+    const digits = whatsapp.replace(/\D/g, "");
+
+    if (digits) {
+      const normalized = digits.startsWith("0")
+        ? `62${digits.slice(1)}`
+        : digits.startsWith("62")
+          ? digits
+          : `62${digits}`;
+
+      return `https://wa.me/${normalized}`;
+    }
+  }
+
+  const email = (
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL ||
+    contact.email ||
+    ""
+  ).trim();
+
+  return email ? `mailto:${email}` : null;
 }
 
 export function getProject(slug: string) {
