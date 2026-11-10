@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ProductPreview } from "@/components/product-preview";
 import { ProjectCard, ProjectFeature } from "@/components/project-card";
+import { Reveal } from "@/components/reveal";
 import {
   aiTools,
   devStack,
@@ -15,12 +16,24 @@ export default function Home() {
   return (
     <main id="main-content" className="flex-1">
       <Hero />
-      <SelectedWork />
-      <Services />
-      <Process />
-      <AiApproach />
-      <About />
-      <Contact />
+      <Reveal>
+        <SelectedWork />
+      </Reveal>
+      <Reveal>
+        <Services />
+      </Reveal>
+      <Reveal>
+        <Process />
+      </Reveal>
+      <Reveal>
+        <AiApproach />
+      </Reveal>
+      <Reveal>
+        <About />
+      </Reveal>
+      <Reveal>
+        <Contact />
+      </Reveal>
     </main>
   );
 }

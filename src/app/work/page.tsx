@@ -26,8 +26,12 @@ export default function WorkPage() {
 
         <h2 className="sr-only">Projects</h2>
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              delay={(index % 3) * 100}
+            />
           ))}
         </div>
       </section>
