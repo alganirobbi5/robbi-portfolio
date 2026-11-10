@@ -15,11 +15,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
 
-  if (!project) return {};
+  if (!project) return { title: "Project Not Found" };
+
+  const title = `${project.title} — ${project.category}`;
+  const description = project.description;
 
   return {
-    title: project.title,
-    description: project.description,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
